@@ -1,56 +1,26 @@
-.. warning::
+from manim import *
 
-    This documentation is a work in progress, please tread carefully.
+class Hello(Scene):
+    def construct(self):
 
-.. _index:
+        text = Text("HELLO")
 
-Manim Editor Overview
-=====================
+        self.play(Write(text))
 
-The ``Manim Editor`` is a tool for post-processing animations generated via ``Manim``.
+        self.wait(1)
 
-    Animating technical concepts is traditionally pretty tedious since it can be difficult to make the animations precise enough to convey them accurately.
-    ``Manim`` uses Python to generate animations programmatically, making it possible to specify exactly how each one should run.
+        self.play(text.animate.scale(2))
 
-    -- The `Manim Documentation <https://docs.manim.community/en/stable>`__
+        self.play(
+            text.animate.shift(UP * 2)
+        )
 
-The ``Manim Editor`` offers two main functions:
+        square = Square()
 
-* Reliable web presentations.
-* Automated video editing (not yet implemented).
+        self.play(Create(square))
 
-.. tip::
+        self.play(
+            square.animate.rotate(PI)
+        )
 
-    If you want to test the presentation output of the ``Manim Editor`` without having to install anything, take a look at the `example <https://manimcommunity.github.io/manim_editor/Tutorial/index.html>`__.
-
-If you don't know how to use ``Manim``, `it's documentation <https://docs.manim.community/en/stable>`__ is where you should start.
-Come back once you've familiarised yourself with the core concepts.
-
-Main Idea
-*********
-
-The ``Manim Editor`` is using the `Manim Section API <https://docs.manim.community/en/stable/reference/manim.scene.section.Section.html>`__.
-It allows the separation of a scene into multiple sections.
-In addition to that it optionally stores names and types for each section.
-``Manim`` only supports the type ``DefaultSectionType.NORMAL`` out of the box.
-The ``Manim`` Editor defines more types, which define how a section should be played in the presentation.
-They are described :ref:`here <create_scene>`.
-
-One or more sections build a slide.
-They are equivalent to slides from PowerPoint and can be shown individually.
-Multiple slides (possibly build out of sections from different ``Manim`` scenes) build one project that can be presented as a whole.
-A Manim Editor project is a directory that will house everything needed to present a project.
-More on that :ref:`here <create_project>`.
-
-.. note::
-
-    The Section API is a new feature of ``Manim`` v0.12.0;
-    thus you can't use any older versions than that.
-
-.. toctree::
-   :maxdepth: 3
-   :caption: Table of Contents:
-
-   installation
-   use
-   internals
+        self.wait(2)
